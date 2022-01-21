@@ -1,6 +1,6 @@
 package com.example.nfo_be.auth;
 
-import com.example.nfo_be.auth.application.IAuthApplication;
+import com.example.nfo_be.auth.service.AuthService;
 import com.example.nfo_be.auth.command.CommandChangePassword;
 import com.example.nfo_be.auth.command.CommandLogin;
 import com.example.nfo_be.auth.command.CommandSignInWithGoogle;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 @Component
 @RestController(value = "/auth")
-public class AuthController extends ResponseUtils {
+public class AuthResource extends ResponseUtils {
     @Autowired
-    private IAuthApplication authApplication;
+    private AuthService authService;
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public String login(@RequestBody CommandLogin command) {
         try {
-            return this.outJson(9999, null, authApplication.login(command).orElse(null));
+            return this.outJson(9999, null, authService.login(command).orElse(null));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
@@ -27,7 +27,7 @@ public class AuthController extends ResponseUtils {
     @PostMapping(value = "/auth/sign_with_google")
     public String SignInWithGoogle(@RequestBody CommandSignInWithGoogle command) {
         try {
-            return this.outJson(9999, null, authApplication.signInWithGoogle(command).orElse(null));
+            return this.outJson(9999, null, authService.signInWithGoogle(command).orElse(null));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
@@ -37,7 +37,7 @@ public class AuthController extends ResponseUtils {
     public String resetPassword(@RequestBody CommandChangePassword command, @RequestHeader String Authorization) {
         try {
             command.setRole(getMemberType(Authorization));
-            return this.outJson(9999, null, authApplication.resetPassword(command).orElse(false));
+            return this.outJson(9999, null, authService.resetPassword(command).orElse(false));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
@@ -46,7 +46,7 @@ public class AuthController extends ResponseUtils {
     @GetMapping(value = "/auth/request_forget_password/{email}")
     public String requestForgetPassword(@PathVariable String email) {
         try {
-            return this.outJson(9999, null, authApplication.requestForgetPassword(email).orElse(false));
+            return this.outJson(9999, null, authService.requestForgetPassword(email).orElse(false));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
@@ -56,7 +56,7 @@ public class AuthController extends ResponseUtils {
     public String forgetPassword(@RequestHeader String Authorization, @RequestBody CommandChangePassword command) {
         try {
             command.setCurrent_id(this.getMemberId(Authorization));
-            return this.outJson(9999, null, authApplication.forgetPassword(command).orElse(false));
+            return this.outJson(9999, null, authService.forgetPassword(command).orElse(false));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
@@ -66,7 +66,7 @@ public class AuthController extends ResponseUtils {
     public String changePassword(@RequestHeader String Authorization, @RequestBody CommandChangePassword command) {
         try {
             command.setCurrent_id(this.getMemberId(Authorization));
-            return this.outJson(9999, null, authApplication.changePassword(command).orElse(false));
+            return this.outJson(9999, null, authService.changePassword(command).orElse(false));
         } catch (Throwable throwable) {
             return this.outJson(-9999, throwable.getMessage(), null);
         }

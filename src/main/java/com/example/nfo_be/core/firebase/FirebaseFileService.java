@@ -1,4 +1,4 @@
-package com.englishcenter.core.firebase;
+package com.example.nfo_be.core.firebase;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Blob;

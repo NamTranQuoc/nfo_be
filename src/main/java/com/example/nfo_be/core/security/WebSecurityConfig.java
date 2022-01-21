@@ -1,6 +1,6 @@
-package com.englishcenter.core.security;
+package com.example.nfo_be.core.security;
 
-import com.englishcenter.core.utils.enums.APIOpenEnum;
+import com.example.nfo_be.core.utils.enums.APIOpenEnum;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

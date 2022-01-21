@@ -1,4 +1,4 @@
-package com.englishcenter.core.mail;
+package com.example.nfo_be.core.mail;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

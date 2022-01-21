@@ -1,7 +1,7 @@
-package com.englishcenter.core.security;
+package com.example.nfo_be.core.security;
 
-import com.englishcenter.auth.application.AuthApplication;
-import com.englishcenter.auth.application.IAuthApplication;
+import com.example.nfo_be.auth.service.AuthService;
+import com.example.nfo_be.auth.service.IAuthService;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -13,7 +13,7 @@ public class JwtTokenFilterConfigurer extends SecurityConfigurerAdapter<DefaultS
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        IAuthApplication authApplication = new AuthApplication();
+        IAuthService authApplication = new AuthService();
         JwtTokenFilter customFilter = new JwtTokenFilter(authApplication);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }

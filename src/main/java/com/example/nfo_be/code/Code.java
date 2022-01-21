@@ -1,4 +1,4 @@
-package com.englishcenter.code;
+package com.example.nfo_be.code;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -25,10 +25,4 @@ public class Code implements Serializable {
     private String prefix;
     @Builder.Default
     private Long current_number = 1L;
-
-    public static class Type {
-        public final static String HV = "HV-";
-        public final static String GV = "GV-";
-        public final static String NV = "NV-";
-    }
 }

@@ -1,6 +1,6 @@
-package com.englishcenter.core.security;
+package com.example.nfo_be.core.security;
 
-import com.englishcenter.auth.application.IAuthApplication;
+import com.example.nfo_be.auth.service.IAuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,10 +16,10 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private final IAuthApplication authApplication;
+    private final IAuthService authApplication;
     private final MyUserDetails myUserDetails;
 
-    public JwtTokenFilter(IAuthApplication authApplication) {
+    public JwtTokenFilter(IAuthService authApplication) {
         this.authApplication = authApplication;
         this.myUserDetails = new MyUserDetails();
     }

@@ -9,7 +9,7 @@ import com.example.nfo_be.member.Member;
 
 import java.util.Optional;
 
-public interface IAuthApplication {
+public interface IAuthService {
     Optional<Auth> add(Member member) throws Exception;
 
     Boolean checkJwt(String jwt);

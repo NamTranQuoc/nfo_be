@@ -1,7 +1,6 @@
-package com.englishcenter.core.utils;
+package com.example.nfo_be.core.utils;
 
-import com.englishcenter.core.utils.enums.MongodbEnum;
-import com.englishcenter.member.command.CommandSearchMember;
+import com.example.nfo_be.core.utils.enums.MongodbEnum;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
@@ -155,7 +154,7 @@ public class MongoDBConnection<T> {
         mongoCollection.deleteMany(new Document(query)).getDeletedCount();
     }
 
-    public Optional<Paging<T>> find(Map<String, Object> query, CommandSearchMember.Sort sort, int page, int size) {
+    public Optional<Paging<T>> find(Map<String, Object> query, Sort sort, int page, int size) {
         try {
             long count = mongoCollection.count(new Document(query));
             if (count > 0) {
@@ -175,7 +174,7 @@ public class MongoDBConnection<T> {
         }
     }
 
-    public Optional<List<T>> findList(Map<String, Object> query, CommandSearchMember.Sort sort, int page, int size) {
+    public Optional<List<T>> findList(Map<String, Object> query, Sort sort, int page, int size) {
         try {
             return Optional.of(mongoCollection.find(new Document(query)).sort(new Document(sort.getField(), sort.getIs_asc() ? 1 : -1)).skip((page - 1) * size).limit(size).into(new ArrayList<>()));
         } catch (Exception e) {

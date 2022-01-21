@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class AuthApplication implements IAuthApplication {
+public class AuthService implements IAuthService {
     public final MongoDBConnection<Auth> mongoDBConnection;
     @Autowired
     private MemberService memberService;
@@ -51,7 +51,7 @@ public class AuthApplication implements IAuthApplication {
     private final long JWT_EXPIRATION = 24 * 60 * 60 * 1000;
 
     @Autowired
-    public AuthApplication() {
+    public AuthService() {
         mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_auth, Auth.class);
     }
 

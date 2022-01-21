@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class CodeApplication {
+public class CodeService {
     public final MongoDBConnection<Code> mongoDBConnection;
 
     @Autowired
-    public CodeApplication() {
+    public CodeService() {
         mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_code, Code.class);
     }
 

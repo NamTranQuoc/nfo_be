@@ -1,4 +1,4 @@
-package com.englishcenter.core.thymeleaf;
+package com.example.nfo_be.core.thymeleaf;
 
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Service;

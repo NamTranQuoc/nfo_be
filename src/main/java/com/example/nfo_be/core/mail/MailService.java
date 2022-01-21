@@ -1,9 +1,7 @@
-package com.englishcenter.core.mail;
+package com.example.nfo_be.core.mail;
 
-import com.englishcenter.core.kafka.TopicProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -16,8 +14,7 @@ public class MailService  {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @KafkaListener(id = "SEND_MAIL", topics = TopicProducer.SEND_MAIL)
-    private void send(Mail mail) {
+    public void send(Mail mail) {
         try {
             MimeMessage msg = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);

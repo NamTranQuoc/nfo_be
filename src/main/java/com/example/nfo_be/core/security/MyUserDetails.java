@@ -1,8 +1,8 @@
-package com.englishcenter.core.security;
+package com.example.nfo_be.core.security;
 
-import com.englishcenter.auth.application.AuthApplication;
-import com.englishcenter.auth.application.IAuthApplication;
-import com.englishcenter.auth.command.CommandJwt;
+import com.example.nfo_be.auth.service.AuthService;
+import com.example.nfo_be.auth.service.IAuthService;
+import com.example.nfo_be.auth.command.CommandJwt;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,7 +13,7 @@ public class MyUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String sAuth) throws UsernameNotFoundException {
-        IAuthApplication authApplication = new AuthApplication();
+        IAuthService authApplication = new AuthService();
         CommandJwt commandJwt = authApplication.decodeJwt(sAuth).get();
 
         return org.springframework.security.core.userdetails.User

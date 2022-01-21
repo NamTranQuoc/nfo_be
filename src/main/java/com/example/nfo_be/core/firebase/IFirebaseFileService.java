@@ -1,4 +1,4 @@
-package com.englishcenter.core.firebase;
+package com.example.nfo_be.core.firebase;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;

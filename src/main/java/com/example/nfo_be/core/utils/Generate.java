@@ -1,4 +1,4 @@
-package com.englishcenter.core.utils;
+package com.example.nfo_be.core.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
