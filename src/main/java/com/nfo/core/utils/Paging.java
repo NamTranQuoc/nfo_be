@@ -1,16 +1,18 @@
 package com.nfo.core.utils;
 
-import eu.dozd.mongo.annotation.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Sort {
-    private String field;
-    private Boolean is_asc;
+public class Paging<T> implements Serializable {
+    private List<T> items;
+    private Long total_items;
 }
