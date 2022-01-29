@@ -63,11 +63,15 @@ public class AuthApplication {
         data.put("name", member.getName());
         data.put("username", member.getEmail());
         data.put("password", password);
-        mailService.send(Mail.builder()
-                .mail_to(member.getEmail())
-                .mail_subject("Thư chào mừng!")
-                .mail_content(thymeleafService.getContent("mailNewMember", data))
-                .build());
+        try {
+            mailService.send(Mail.builder()
+                    .mail_to(member.getEmail())
+                    .mail_subject("Thư chào mừng!")
+                    .mail_content(thymeleafService.getContent("mailNewMember", data))
+                    .build());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return mongoDBConnection.insert(auth);
     }
 

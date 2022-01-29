@@ -57,8 +57,8 @@ public class MemberApplication {
         member.setCode(code);
         Optional<Member> optional = mongoDBConnection.insert(member);
         if (optional.isPresent()) {
-            optional.get().setAvatar("avatar-" + optional.get().get_id().toHexString() + ".png");
-            mongoDBConnection.update(optional.get().get_id().toHexString(), optional.get());
+//            optional.get().setAvatar("avatar-" + optional.get().get_id().toHexString() + ".png");
+//            mongoDBConnection.update(optional.get().get_id().toHexString(), optional.get());
             authApplication.add(optional.get());
             return optional;
         }
