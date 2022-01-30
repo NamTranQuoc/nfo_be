@@ -1,6 +1,5 @@
 package com.nfo.core.security;
 
-import com.google.common.collect.ImmutableList;
 import com.nfo.core.utils.enums.APIOpenEnum;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -11,7 +10,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity

@@ -1,13 +1,12 @@
 package com.nfo.core.utils;
 
-import com.nfo.core.utils.enums.MongodbEnum;
-import com.nfo.member.command.CommandSearchMember;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
+import com.nfo.core.utils.enums.MongodbEnum;
 import eu.dozd.mongo.MongoMapper;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;

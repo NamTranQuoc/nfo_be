@@ -1,6 +1,5 @@
 package com.nfo.core.utils;
 
-import eu.dozd.mongo.annotation.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -18,17 +18,15 @@ import java.util.Optional;
 public class MemberApplication {
     public final MongoDBConnection<Member> mongoDBConnection;
     @Autowired
+    private CodeApplication codeApplication;
+    @Autowired
+    private AuthApplication authApplication;
+    @Autowired
     public MemberApplication() {
         mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_member, Member.class);
     }
 
-    @Autowired
-    private CodeApplication codeApplication;
-    @Autowired
-    private AuthApplication authApplication;
-
     public Optional<List<Member>> find(Map<String, Object> query) {
-        query.put("is_deleted", false);
         return mongoDBConnection.find(query);
     }
 
@@ -37,7 +35,6 @@ public class MemberApplication {
             throw new Exception(ExceptionEnum.param_not_null);
         }
         Map<String, Object> query = new HashMap<>();
-        query.put("is_deleted", false);
         query.put("email", member.getEmail());
         long count = mongoDBConnection.count(query).orElse(0L);
         if (count > 0) {
@@ -45,7 +42,6 @@ public class MemberApplication {
         }
         if (StringUtils.isNotBlank(member.getPhone_number())) {
             Map<String, Object> query1 = new HashMap<>();
-            query1.put("is_deleted", false);
             query1.put("phone_number", member.getPhone_number());
             long count1 = mongoDBConnection.count(query1).orElse(0L);
             if (count1 > 0) {
@@ -67,7 +63,6 @@ public class MemberApplication {
 
     public Optional<Member> getByEmail(String email) {
         Map<String, Object> query = new HashMap<>();
-        query.put("is_deleted", false);
         query.put("email", email);
         return mongoDBConnection.findOne(query);
     }

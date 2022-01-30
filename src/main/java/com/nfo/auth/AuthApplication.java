@@ -1,6 +1,6 @@
 package com.nfo.auth;
 
-import com.nfo.auth.Auth;
+import com.google.gson.Gson;
 import com.nfo.auth.command.CommandChangePassword;
 import com.nfo.auth.command.CommandJwt;
 import com.nfo.auth.command.CommandLogin;
@@ -17,7 +17,6 @@ import com.nfo.core.utils.enums.ExceptionEnum;
 import com.nfo.core.utils.enums.MongodbEnum;
 import com.nfo.member.Member;
 import com.nfo.member.MemberApplication;
-import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +32,8 @@ import java.util.Optional;
 @Component
 public class AuthApplication {
     public final MongoDBConnection<Auth> mongoDBConnection;
+    private final String JWT_SECRET = "UUhuhdadyh9*&^777687";
+    private final long JWT_EXPIRATION = 24 * 60 * 60 * 1000;
     @Autowired
     private MemberApplication memberApplication;
     @Autowired
@@ -43,9 +44,6 @@ public class AuthApplication {
     private FirebaseFileService firebaseFileService;
     @Autowired
     private MailService mailService;
-
-    private final String JWT_SECRET = "UUhuhdadyh9*&^777687";
-    private final long JWT_EXPIRATION = 24 * 60 * 60 * 1000;
 
     @Autowired
     public AuthApplication() {
@@ -190,7 +188,7 @@ public class AuthApplication {
         }
     }
 
-    public Optional<Boolean> resetPassword(CommandChangePassword command) throws Exception{
+    public Optional<Boolean> resetPassword(CommandChangePassword command) throws Exception {
         if (!Member.MemberType.ADMIN.equals(command.getRole())) {
             throw new Exception(ExceptionEnum.member_type_deny);
         }

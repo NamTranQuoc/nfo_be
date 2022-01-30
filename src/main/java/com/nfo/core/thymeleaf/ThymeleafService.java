@@ -18,7 +18,7 @@ public class ThymeleafService {
     private static final String MAIL_TEMPLATE_SUFFIX = ".html";
     private static final String UTF_8 = "UTF-8";
 
-    private static TemplateEngine templateEngine;
+    private static final TemplateEngine templateEngine;
 
     static {
         templateEngine = emailTemplateEngine();
