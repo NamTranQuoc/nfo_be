@@ -21,6 +21,7 @@ public class MemberApplication {
     private CodeApplication codeApplication;
     @Autowired
     private AuthApplication authApplication;
+
     @Autowired
     public MemberApplication() {
         mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_member, Member.class);
