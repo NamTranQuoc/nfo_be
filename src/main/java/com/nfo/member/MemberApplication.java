@@ -5,6 +5,7 @@ import com.nfo.code.CodeApplication;
 import com.nfo.core.utils.MongoDBConnection;
 import com.nfo.core.utils.enums.ExceptionEnum;
 import com.nfo.core.utils.enums.MongodbEnum;
+import com.nfo.member.command.UpdateMemberCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -66,5 +67,39 @@ public class MemberApplication {
         Map<String, Object> query = new HashMap<>();
         query.put("email", email);
         return mongoDBConnection.findOne(query);
+    }
+
+    public Optional<Member> update(UpdateMemberCommand command) throws Exception {
+        if (StringUtils.isAnyBlank(command.getId())) {
+            throw new Exception(ExceptionEnum.param_not_null);
+        }
+        Optional<Member> optional = mongoDBConnection.getById(command.getId());
+        if (!optional.isPresent()) {
+            throw new Exception(ExceptionEnum.member_not_exist);
+        }
+        Member member = optional.get();
+
+        if (StringUtils.isNotBlank(command.getName()) && !command.getName().equals(member.getName())) {
+            member.setName(command.getName());
+        }
+
+        if (StringUtils.isNotBlank(command.getGender()) && !command.getGender().equals(member.getGender())) {
+            member.setGender(command.getGender());
+        }
+
+        if (StringUtils.isNotBlank(command.getPhone_number()) && !command.getPhone_number().equals(member.getPhone_number())) {
+            Map<String, Object> query = new HashMap<>();
+            query.put("phone_number", command.getPhone_number());
+            long count = mongoDBConnection.count(query).orElse(0L);
+            if (count > 0) {
+                throw new Exception(ExceptionEnum.phone_number_used);
+            }
+            member.setPhone_number(command.getPhone_number());
+        }
+
+        if (StringUtils.isNotBlank(command.getAvatar()) && !command.getAvatar().equals(member.getAvatar())) {
+            member.setAvatar(command.getAvatar());
+        }
+        return mongoDBConnection.update(member.get_id().toHexString(), member);
     }
 }
