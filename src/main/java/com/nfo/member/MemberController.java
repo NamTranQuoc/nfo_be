@@ -31,7 +31,7 @@ public class MemberController extends ResponseUtils {
     }
 
     @PutMapping(value = "/member/update")
-    public String update(UpdateMemberCommand command) {
+    public String update(@RequestBody UpdateMemberCommand command) {
         try {
             return this.outJson(9999, null, userApplication.update(command).orElse(null));
         } catch (Throwable throwable) {

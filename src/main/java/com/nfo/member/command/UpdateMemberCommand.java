@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateMemberCommand {
-    private String id;
-    private String name;
-    private String gender;
-    private String phone_number;
-    private String avatar;
+    public String id;
+    public String name;
+    public String gender;
+    public String phone_number;
+    public String avatar;
 }
