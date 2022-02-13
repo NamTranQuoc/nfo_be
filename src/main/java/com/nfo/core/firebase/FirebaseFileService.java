@@ -58,7 +58,7 @@ public class FirebaseFileService implements IFirebaseFileService {
 
     @Override
     public String getDownloadUrl(String name, String ref) {
-        return "https://firebasestorage.googleapis.com/v0/b/englishcenter-2021.appspot.com/o/" + ref + "%2F" + name + "?alt=media";
+        return "https://firebasestorage.googleapis.com/v0/b/nfo-app.appspot.com/o/" + ref + "%2F" + name + "?alt=media";
     }
 
     @Override

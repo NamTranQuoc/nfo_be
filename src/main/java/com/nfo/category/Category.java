@@ -1,4 +1,4 @@
-package com.nfo.member;
+package com.nfo.category;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -17,27 +17,14 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member implements Serializable {
+public class Category implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     @Id
     ObjectId _id;
     private String name;
-    private String code;
-    @Builder.Default
-    private Long create_date = System.currentTimeMillis();
-    @Builder.Default
-    private String type = MemberType.CUSTOMER;
-    private String email;
-    private String avatar;
-    private String phone_number;
-    private String gender;
+    private String image;
     @Builder.Default
     private String status = MemberStatus.ACTIVE;
-
-    public static class MemberType {
-        public final static String ADMIN = "ADMIN";
-        public final static String CUSTOMER = "CUSTOMER";
-    }
 
     public static class MemberStatus {
         public final static String ACTIVE = "ACTIVE";

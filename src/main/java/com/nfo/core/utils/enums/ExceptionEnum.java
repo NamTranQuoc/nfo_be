@@ -9,4 +9,6 @@ public class ExceptionEnum {
     public static final String password_incorrect = "Mật khẩu không đúng";
     public static final String confirm_password_incorrect = "Xác nhận mật khẩu không đúng";
     public static final String member_type_deny = "Không có quyền truy cập";
+    public static final String category_exist = "Danh mục đã tồn tại";
+    public static final String only_positive_numbers_are_allowed = "Chỉ cho phép nhập số dương";
 }

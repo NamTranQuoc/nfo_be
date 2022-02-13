@@ -1,2 +1,16 @@
-package com.nfo.product;public class ProductType {
+package com.nfo.product;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductType {
+    private String name;
+    private Long price;
+    private Long quantity;
 }

@@ -18,14 +18,18 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category implements Serializable {
+public class Product implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     @Id
     ObjectId _id;
     private String name;
     private List<String> images;
-    private String category_id;
+    private List<String> categories;
+    private List<ProductType> product_types;
     private String description;
+    private String member_id;
+    private String address;
+    private String phone;
     @Builder.Default
     private String status = MemberStatus.ACTIVE;
 

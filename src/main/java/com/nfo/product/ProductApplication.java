@@ -1,9 +1,12 @@
-package com.nfo.category;
+package com.nfo.product;
 
+import com.nfo.category.Category;
 import com.nfo.core.firebase.FirebaseFileService;
 import com.nfo.core.utils.MongoDBConnection;
 import com.nfo.core.utils.enums.ExceptionEnum;
 import com.nfo.core.utils.enums.MongodbEnum;
+import com.nfo.product.command.UpdateProductCommand;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,35 +16,38 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class CategoryApplication {
-    public final MongoDBConnection<Category> mongoDBConnection;
+public class ProductApplication {
+    public final MongoDBConnection<Product> mongoDBConnection;
 
     @Autowired
-    public CategoryApplication() {
-        mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_category, Category.class);
+    public ProductApplication() {
+        mongoDBConnection = new MongoDBConnection<>(MongodbEnum.collection_product, Product.class);
     }
 
     @Autowired
     private FirebaseFileService firebaseFileService;
 
-    public Optional<Category> add(Category category) throws Exception {
-        if (StringUtils.isBlank(category.getName())) {
+    public Optional<Product> add(Product product) throws Exception {
+        if (StringUtils.isBlank(product.getName())
+            || CollectionUtils.isEmpty(product.getProduct_types())
+            || CollectionUtils.isEmpty(product.getCategories())) {
             throw new Exception(ExceptionEnum.param_not_null);
         }
 
-        Map<String, Object> query = new HashMap<>();
-        query.put("name", category.getName());
-        long count = mongoDBConnection.count(query).orElse(0L);
-        if (count > 0) {
-            throw new Exception(ExceptionEnum.category_exist);
+        for (ProductType productType: product.getProduct_types()) {
+            if (StringUtils.isBlank(productType.getName()) || productType.getPrice() == null || productType.getQuantity() == null) {
+                throw new Exception(ExceptionEnum.param_not_null);
+            }
+            if (productType.getQuantity() <= 0 || productType.getPrice() <= 0) {
+                throw new Exception(ExceptionEnum.only_positive_numbers_are_allowed);
+            }
         }
+        return mongoDBConnection.insert(product);
+    }
 
-        Optional<Category> insert = mongoDBConnection.insert(category);
-        if (insert.isPresent()) {
-            String id = insert.get().get_id().toHexString();
-            insert.get().setImage(firebaseFileService.getDownloadUrl(id + ".png", "categories"));
-            return mongoDBConnection.update(id, insert.get());
+    public Optional<Product> update(UpdateProductCommand command) throws Exception {
+        if (StringUtils.isBlank(command.getId())) {
+            this.
         }
-        return Optional.empty();
     }
 }
