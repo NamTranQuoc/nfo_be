@@ -46,8 +46,6 @@ public class ProductApplication {
     }
 
     public Optional<Product> update(UpdateProductCommand command) throws Exception {
-        if (StringUtils.isBlank(command.getId())) {
-            this.
-        }
+        return Optional.empty();
     }
 }
