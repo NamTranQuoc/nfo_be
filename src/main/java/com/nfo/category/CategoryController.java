@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @Component
 @RestController(value = "/category")
 public class CategoryController extends ResponseUtils {
@@ -22,4 +24,14 @@ public class CategoryController extends ResponseUtils {
             return this.outJson(-9999, throwable.getMessage(), null);
         }
     }
+
+    @GetMapping(value = "/category/get_all")
+    public String getAll() {
+        try {
+            return this.outJson(9999, null, categoryApplication.mongoDBConnection.find(new HashMap<>()).orElse(null));
+        } catch (Throwable throwable) {
+            return this.outJson(-9999, throwable.getMessage(), null);
+        }
+    }
+
 }
